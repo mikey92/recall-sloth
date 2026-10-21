@@ -2,7 +2,7 @@
 
 **Nobody reads recall notices. Paste what you've bought; Gemma, running in your browser, checks it against every U.S. consumer product recall since 2016.**
 
-Live: https://recall-sloth.mikey9220.workers.dev · Evaluation: [eval/EVAL.md](eval/EVAL.md)
+Live: https://recall-sloth.mikey9220.workers.dev · Demo video: https://youtu.be/8VX31yux6Qo · Write-up: [on DEV](https://dev.to/mikek/recall-sloth-nobody-reads-recall-notices-so-gemma-4-reads-3411-of-them-in-your-browser-5eg4) · Evaluation: [eval/EVAL.md](eval/EVAL.md)
 
 Paste a list, your Amazon "Your Orders" page, or order emails as they are. Every item comes back in one of four piles:
 
