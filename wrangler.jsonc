@@ -1,0 +1,6 @@
+{
+  // Static site only: the page, its worker script and the recall list. No server code.
+  "name": "recall-sloth",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./dist" }
+}

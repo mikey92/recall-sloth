@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Recall Sloth</title>
+    <meta name="description" content="Paste what you've bought. Gemma, running in this tab, checks it against every U.S. consumer product recall since 2016. Nothing you paste leaves the page." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235f7f45'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle'%3E%F0%9F%A6%A5%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <h1>Recall Sloth</h1>
+        <p>
+          Nobody reads recall notices. Paste what you've bought and Gemma, running here in your browser, checks every item
+          against every U.S. consumer product recall since 2016. What you paste never leaves this page.
+        </p>
+      </header>
+
+      <section class="panel">
+        <label for="items" class="label">What you own</label>
+        <textarea id="items" rows="8" spellcheck="false" placeholder="One thing per line, or paste your Amazon “Your Orders” page or an order email as it is."></textarea>
+        <div class="row">
+          <button id="check" class="primary">Check for Recalls</button>
+          <button id="example" class="plain">Try an Example List</button>
+        </div>
+        <details class="settings">
+          <summary>Model</summary>
+          <label class="radio"><input type="radio" name="model" value="gemma-4-e2b" checked /> Gemma 4 E2B · a 3 GB download, once; then it lives in your browser</label>
+          <label class="radio"><input type="radio" name="model" value="none" /> No model: rules only, nothing to download (more “check the label” answers)</label>
+        </details>
+        <p id="status" class="status" aria-live="polite"></p>
+        <progress id="bar" hidden></progress>
+      </section>
+
+      <div id="results"></div>
+
+      <footer class="foot">
+        <p id="source"></p>
+        <p>
+          How it decides: a recall is only a candidate when it names the same brand and the same kind of thing. If the
+          notice's model number is in what you pasted, it says <b>recalled</b>. If the notice names a different model than
+          yours, it says <b>not this one</b>. Otherwise Gemma reads the notice next to your item, and anything it isn't sure
+          about becomes <b>check the label</b>, with the notice's own words on where to look.
+          <a href="https://github.com/mikey92/recall-sloth">Code and evaluation</a>.
+        </p>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
