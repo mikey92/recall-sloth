@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { buildIndex, candidates, type Recall } from "../src/recalls.ts";
 import { judge, type Generate } from "../src/judge.ts";
-import { ollama } from "./gemma.ts";
+import { nodeGemma, ollama } from "./gemma.ts";
 
 const dir = `${homedir()}/.recall-sloth`;
 const orders = JSON.parse(readFileSync(`${dir}/orders-mikey9220.json`, "utf8")) as { subject: string; date: string; text: string }[];
@@ -19,7 +19,7 @@ for (const o of orders) {
 const unique = [...new Map(items.map((i) => [i.item, i])).values()];
 console.log(`${orders.length} order emails → ${unique.length} named items (${unique.filter((i) => i.truncated).length} cut short by Amazon), ${categoryOnly} emails name only a category`);
 const ix = buildIndex(JSON.parse(readFileSync("public/recalls.json", "utf8")) as Recall[]);
-const gen: Generate = process.argv[2] ? ollama(process.argv[2]) : async () => "";
+const gen: Generate = process.argv[2] === "--none" ? async () => "" : process.argv[2] ? ollama(process.argv[2]) : await nodeGemma();
 const out = [];
 for (const i of unique) {
   const cs = candidates(i.item, ix, 3);
