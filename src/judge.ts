@@ -75,8 +75,11 @@ export async function judge(item: string, c: Candidate, generate: Generate): Pro
   // Both sides name a model and the names don't meet: the notice is about a different model. No model needed.
   const mine = designators(item);
   const theirs = designators([...r.products, ...r.ids].join(" "));
-  if (mine.size && theirs.size && ![...mine].some((d) => theirs.has(d)))
-    return { kind: "not-this", recall: r, why: `The notice covers ${[...r.products].slice(0, 2).join("; ")}${r.ids.length ? ` (${r.ids.slice(0, 4).join(", ")})` : ""}; yours says ${[...mine].join(", ")}.` };
+  if (mine.size && theirs.size && ![...mine].some((d) => theirs.has(d))) {
+    const named = r.products.slice(0, 2).join("; ");
+    const extra = r.ids.filter((id) => !named.toUpperCase().includes(id)).slice(0, 4);
+    return { kind: "not-this", recall: r, why: `The notice covers ${named}${extra.length ? ` (${extra.join(", ")})` : ""}; yours says ${[...mine].join(", ")}.` };
+  }
   // Otherwise Gemma decides one thing: is it even the same kind of product? A name cut short
   // ("Zinus Memory Foam 10 Inch...") doesn't say what it is, so "different" can't be trusted there.
   const cutShort = /(\.\.\.|…)$/.test(item.trim());

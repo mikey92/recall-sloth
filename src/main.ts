@@ -181,7 +181,7 @@ function notice(r: Recall, extra = "") {
     ${r.img ? `<img src="${esc(r.img)}" alt="" referrerpolicy="no-referrer" />` : ""}
     <div>
       <a href="${esc(r.url)}" target="_blank" rel="noreferrer">${esc(r.title)}</a>
-      <small>CPSC recall ${esc(r.n)} · ${esc(r.date)}${r.sold ? ` · sold at ${esc(r.sold.slice(0, 90))}` : ""}</small>
+      <small>CPSC recall ${esc(r.n)} · ${esc(r.date)}${r.sold ? ` · sold at ${esc(first(r.sold, 110))}` : ""}</small>
       ${extra}
     </div>
   </div>`;
